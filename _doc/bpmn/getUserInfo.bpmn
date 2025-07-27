@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+    <bpmn:process id="getUserInfo" name="getUserInfo" isExecutable="true">
+        <bpmn:startEvent id="StartEvent_1">
+            <bpmn:outgoing>SequenceFlow_0o57gl4</bpmn:outgoing>
+        </bpmn:startEvent>
+        <bpmn:endEvent id="EndEvent_1">
+            <bpmn:incoming>SequenceFlow_0tu9cp3</bpmn:incoming>
+        </bpmn:endEvent>
+        <bpmn:serviceTask id="SendMessageTask" name="Send &#10;Message" camunda:asyncBefore="true" camunda:delegateExpression="${sendMessage}">
+            <bpmn:incoming>Flow_0oy5fi3</bpmn:incoming>
+            <bpmn:outgoing>SequenceFlow_0tu9cp3</bpmn:outgoing>
+        </bpmn:serviceTask>
+        <bpmn:sequenceFlow id="SequenceFlow_0o57gl4" sourceRef="StartEvent_1" targetRef="UserInfoGetUserDataTask"/>
+        <bpmn:sequenceFlow id="SequenceFlow_0tu9cp3" sourceRef="SendMessageTask" targetRef="EndEvent_1"/>
+        <bpmn:serviceTask id="UserInfoGetUserDataTask" name="UserInfo Get User Data" camunda:asyncBefore="true" camunda:delegateExpression="${userInfoGetUserData}">
+            <bpmn:incoming>SequenceFlow_0o57gl4</bpmn:incoming>
+            <bpmn:outgoing>Flow_0oy5fi3</bpmn:outgoing>
+        </bpmn:serviceTask>
+        <bpmn:sequenceFlow id="Flow_0oy5fi3" sourceRef="UserInfoGetUserDataTask" targetRef="SendMessageTask"/>
+    </bpmn:process>
+    <bpmn:error id="tr_exception" name="TR_EXCEPTION" errorCode="TR_EXCEPTION"/>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+        <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="getUserInfo">
+            <bpmndi:BPMNEdge id="SequenceFlow_0tu9cp3_di" bpmnElement="SequenceFlow_0tu9cp3">
+                <di:waypoint x="490" y="125"/>
+                <di:waypoint x="542" y="125"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="1229" y="154" width="90" height="12"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="SequenceFlow_0o57gl4_di" bpmnElement="SequenceFlow_0o57gl4">
+                <di:waypoint x="188" y="125"/>
+                <di:waypoint x="240" y="125"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="98" y="154" width="90" height="12"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_0oy5fi3_di" bpmnElement="Flow_0oy5fi3">
+                <di:waypoint x="340" y="125"/>
+                <di:waypoint x="390" y="125"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+                <dc:Bounds x="152" y="107" width="36" height="36"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="399" y="193" width="90" height="20"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="EndEvent_0wpvj65_di" bpmnElement="EndEvent_1">
+                <dc:Bounds x="542" y="107" width="36" height="36"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="1270" y="197" width="90" height="12"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="ServiceTask_02g673z_di" bpmnElement="SendMessageTask">
+                <dc:Bounds x="390" y="85" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Activity_1bkr5od_di" bpmnElement="UserInfoGetUserDataTask">
+                <dc:Bounds x="240" y="85" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>

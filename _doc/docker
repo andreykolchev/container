@@ -1,0 +1,21 @@
+##gateway
+docker build --tag=repo/gateway:latest .
+docker push repo/gateway:latest
+
+##deployment
+mkdir mock-api
+create docker-compose.yml
+
+##start
+docker-compose up -d
+
+##stop
+docker-compose down --rmi all
+
+##front deploy
+ssh deployer@aval.diceus.net
+cd ~/rba-front
+git pull
+rm -rf dist
+npm install
+npm run build
